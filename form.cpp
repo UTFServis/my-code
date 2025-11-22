@@ -14,18 +14,6 @@ using json = nlohmann::json;
 
 Connection* con = nullptr;
 
-string generateToken(int length = 32) {
-    static const char chars[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dis(0, sizeof(chars) - 2);
-
-    string token;
-    for(int i=0; i<length; ++i)
-        token += chars[dis(gen)];
-    return token;
-}
 
 tuple<string,string,string> findUser(Connection* con, const string& username) {
     try {
@@ -132,7 +120,7 @@ int main() {
         server.Post("/signup", signUp);
         server.Post("/login", login);
 
-        cout << "Server starting on 0.0.0.0:8080 ..." << endl;
+        cout << "Server starting ..." << endl;
         server.listen("127.0.0.1", 8080);
 
     } catch(SQLException &e) {
