@@ -101,7 +101,7 @@ int main() {
         server.Get("/users", handleGet);
         server.Post("/users", handlePost);
 
-        cout << "Server starting on 0.0.0.0:8080 ..." << endl;
+        cout << "Server starting ..." << endl;
         server.listen("127.0.0.1", 8080);
 
     } catch (SQLException& e) {
