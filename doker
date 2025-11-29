@@ -1,0 +1,32 @@
+# Use a recent Ubuntu as base
+FROM ubuntu:22.04
+
+# نصب بسته‌های لازم
+RUN apt-get update && apt-get install -y \
+    build-essential cmake git \
+    libssl-dev \
+    default-libmysqlclient-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# دایرکتوری کاری
+WORKDIR /app
+
+# کپی کردن همه فایل‌ها
+COPY . /app
+
+# اگر پروژه با CMake ساخته می‌شود
+# RUN cmake . && make
+
+# فرض: Makefile یا کامپایل ساده دارید
+RUN g++ -std=c++17 -O2 \
+    app.cpp server.cpp signUp.cpp login.cpp test.cpp \
+    -o myapp \
+    -lmysqlclient -lssl -lcrypto -lpthread
+
+# در صورت استفاده از httplib یا jwt-cpp، headers داخل پروژه‌اند
+
+# باز کردن پورت (فرض 8080 — اگر متفاوت است تغییر بده)
+EXPOSE 8080
+
+# دستور اجرا
+CMD ["./myapp"]
