@@ -1,0 +1,17 @@
+signup
+curl -X POST http://127.0.0.1:8080/signup -H "Content-Type: application/json" -d '{"username":"admin","password":"123456" , "password_confirm":"123456"}'
+
+LOGIN
+curl -X POST http://127.0.0.1:8080/login -H "Content-Type: application/json" -d '{"username":"admin","password":"123456"}'
+
+REFRESH
+curl -X POST http://127.0.0.1:8080/refresh -H "Content-Type: application/json" -d '{"refresh_token":" "}'
+
+DELETE
+curl -X DELETE http://127.0.0.1:8080/users/username   -H "Authorization: Bearer "
+
+PUT
+curl -X PUT http://localhost:8080/users/username -H "Authorization: Bearer " -H "Content-Type: application/json" -d '{"new_role":"user"}'
+
+ALL USERS
+curl -X GET http://127.0.0.1:8080/users -H "Authorization: Bearer "
